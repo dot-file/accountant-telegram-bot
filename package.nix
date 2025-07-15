@@ -1,6 +1,6 @@
 { pkgs }:
 
-pkgs.writers.writePython3Bin "librescore-telegram-bot"
+pkgs.writers.writePython3Bin "accountant-telegram-bot"
 {
   libraries = with pkgs.python3Packages; [
     pytelegrambotapi
