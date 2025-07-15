@@ -11,6 +11,12 @@ in
   options = {
     services.pythonTelegramBots.accountant-telegram-bot = {
       enable = lib.mkEnableOption description;
+
+      databasePath = lib.mkOption {
+        type = lib.types.str;
+        default = "/var/lib/pytelegrambots/accountant-telegram-bot/db.db";
+        description = "Path to the bot's database.";
+      };
     };
   };
 
@@ -34,6 +40,8 @@ in
           echo "Config file at $CONFIG doesn't exist"
           exit 1
         fi
+
+        export DATABASE_PATH=${cfg.databasePath}
 
         . $CONFIG
 
