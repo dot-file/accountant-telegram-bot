@@ -39,7 +39,7 @@ in
       script = ''
         set -a
 
-        CONFIG=${configPath}/config
+        CONFIG=${cfg.configDir}/config
         if [ ! -f $CONFIG ]
         then
           echo "Config file at $CONFIG doesn't exist"
