@@ -3,7 +3,6 @@
 let
   package = import ./package.nix { inherit pkgs; };
   description = "Telegram bot that keeps track of your debts";
-  configPath = "/etc/pytelegrambots/accountant-telegram-bot/config";
 
   cfg = config.services.pythonTelegramBots.accountant-telegram-bot;
 in
@@ -16,6 +15,12 @@ in
         type = lib.types.str;
         default = "/var/lib/pytelegrambots/accountant-telegram-bot";
         description = "Data directory of the bot.";
+      };
+
+      configDir = lib.mkOption {
+        type = lib.types.str;
+        default = "/etc/pytelegrambots/accountant-telegram-bot";
+        description = "Config directory of the bot.";
       };
     };
   };
@@ -34,7 +39,7 @@ in
       script = ''
         set -a
 
-        CONFIG=${configPath}
+        CONFIG=${configPath}/config
         if [ ! -f $CONFIG ]
         then
           echo "Config file at $CONFIG doesn't exist"
