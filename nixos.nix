@@ -12,10 +12,10 @@ in
     services.pythonTelegramBots.accountant-telegram-bot = {
       enable = lib.mkEnableOption description;
 
-      databasePath = lib.mkOption {
+      stateDir = lib.mkOption {
         type = lib.types.str;
-        default = "/var/lib/pytelegrambots/accountant-telegram-bot/db.db";
-        description = "Path to the bot's database.";
+        default = "/var/lib/pytelegrambots/accountant-telegram-bot";
+        description = "Data directory of the bot.";
       };
     };
   };
@@ -41,7 +41,8 @@ in
           exit 1
         fi
 
-        export DATABASE_PATH=${cfg.databasePath}
+        export DATABASE_PATH=${cfg.stateDir}/db.db
+        mkdir -p ${cfg.stateDir}
 
         . $CONFIG
 
